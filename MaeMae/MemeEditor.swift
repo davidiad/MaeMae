@@ -118,7 +118,7 @@ class MemeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 }
                 shareViewController.preferredContentSize = CGSizeMake(360.0, 700.0)
                 if #available(iOS 8.0, *) {
-                    let popoverMenuViewController = shareViewController.popoverPresentationController
+                    _ = shareViewController.popoverPresentationController
                 } else {
                     // Fallback on earlier versions
                 }
@@ -267,7 +267,7 @@ class MemeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         // ensure that cellSize has at least a default value
         let defaultCellSize = CGSizeMake(100, 100)
-        var meme = Meme(originalImage: currentMeme?.originalImage, memedImage: renderedImage!, thumbnail: currentMeme?.thumbnail, bg: bg, topText: topTextfield.text!, bottomText: bottomTextfield.text!, fontsize: currentMeme!.fontsize, cellSize: defaultCellSize)
+        let meme = Meme(originalImage: currentMeme?.originalImage, memedImage: renderedImage!, thumbnail: currentMeme?.thumbnail, bg: bg, topText: topTextfield.text!, bottomText: bottomTextfield.text!, fontsize: currentMeme!.fontsize, cellSize: defaultCellSize)
     
         // Get a reference to the App Delegate, where the memes array is stored
         let object = UIApplication.sharedApplication().delegate
@@ -424,7 +424,7 @@ class MemeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     // MARK: - Notifications
     
     func subscribeToRotationNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditor.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     func unsubscribeToRotationNotifications() {
@@ -432,8 +432,8 @@ class MemeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditor.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditor.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func unsubscribeToKeyboardNotifications() {

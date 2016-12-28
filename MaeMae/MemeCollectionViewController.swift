@@ -24,7 +24,7 @@ class MemeCollectionViewController: UICollectionViewController {
         // Register cell classes
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MemeCollectionViewController.insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
     }
     

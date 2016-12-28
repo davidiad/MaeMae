@@ -23,7 +23,7 @@ class MemeTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         navigationItem.leftBarButtonItem = editButtonItem()
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MemeTableViewController.insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
     }
     
